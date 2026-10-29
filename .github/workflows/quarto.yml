@@ -1,0 +1,16 @@
+name: workflow1
+on: push
+jobs:
+  cokolwiek:
+      runs-on: ubuntu-latest
+      steps:
+        - uses: actions/checkout/@v7
+        - uses: quarto-dev/quarto-actions/setup@v2
+          with:
+            tinytex: true
+        - run: pip install ipykernel nbclient matplotlib PyMPDATA
+        - run: quarto render lab_1.ipynb --to pdf --execute
+        - uses: actions/upload-articfact@v7
+              with:
+                  path: lab_1.pdf
+          
